@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rabbit game</title>
+</head>
+<body>
+<script src="config.js" charset="utf-8"></script>
+<script src="rabbit.js" charset="utf-8"></script>
+<script src="food.js" charset="utf-8"></script>
+<script src="game.js" charset="utf-8"></script>
+<script>
+
+    function keyPressed(e) {
+        e = e || window.event;
+        if (e.keyCode == '38', UP_ARROW && rabbit.vel.y != 1) {
+            rabbit.vel.y = -1;
+            rabbit.vel.x = 0;
+        } else if (e.keyCode == '40', DOWN_ARROW && rabbit.vel.y != -1) {
+            rabbit.vel.y = 1;
+            rabbit.vel.x = 0;
+        }  else if (e.keyCode == '37', LEFT_ARROW && rabbit.vel.x != 1) {
+            rabbit.vel.y = 0;
+            rabbit.vel.x = -1;
+        } else if (e.keyCode == '39',RIGHT_ARROW && rabbit.vel.x != -1) {
+            rabbit.vel.y = 0;
+            rabbit.vel.x = 1;
+        }
+    }
+    update(){
+        this.head.x += this.vel.x * GRID_SIZE;
+        this.head.y += this.vel.y * GRID_SIZE;
+
+        this.head.x = (this.head.x + WITDH) % WITDH;
+        this.head.y = (this.head.y + HEIGHT) % HEIGHT;
+    }
+    function drawRabbit() {
+        // update every RABBIT_SPEED frame
+        if(frameCount % RABBIT_SPEED == 0)
+        {
+            rabbit.update();
+        }
+        rabbit.show();
+    }
+</script>
+</body>
+</html>
